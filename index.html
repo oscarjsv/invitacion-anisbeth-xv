@@ -292,39 +292,6 @@
             50% { transform: translateY(-4px); }
         }
 
-        /* saludo personalizado (desde el link) */
-        .guest-greeting {
-            text-align: center;
-            margin: 0 auto 28px;
-            max-width: 320px;
-            padding: 0 16px;
-            position: relative;
-            z-index: 7;
-        }
-        .guest-greeting .guest-label {
-            display: block;
-            font-size: 0.68rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold-dark);
-            margin-bottom: 2px;
-        }
-        .guest-greeting .guest-name {
-            display: block;
-            font-family: var(--font-script);
-            font-size: clamp(1.7rem, 7vw, 2.3rem);
-            color: var(--navy-blue);
-            line-height: 1.15;
-            overflow-wrap: break-word;
-        }
-        .guest-greeting .guest-pases {
-            display: block;
-            font-size: 0.72rem;
-            letter-spacing: 2px;
-            color: var(--text-dark);
-            margin-top: 4px;
-        }
-
         /* ================= CONTENIDO ================= */
         #main-content {
             width: 100%;
@@ -576,11 +543,6 @@
 
         <!-- ================= SOBRE (1 y 2) ================= -->
         <section id="envelope-screen">
-            <div class="guest-greeting" id="guest-greeting" style="display:none;">
-                <span class="guest-label">Con especial cariño para</span>
-                <span class="guest-name" id="guest-name"></span>
-                <span class="guest-pases" id="guest-pases" style="display:none;"></span>
-            </div>
             <img src="mariposa.png" alt="" class="butterfly" style="top: 12%; right: 14%; width: 46px; animation-delay: .4s;">
             <img src="mariposa.png" alt="" class="butterfly" style="top: 20%; left: 12%; width: 34px; animation-delay: 1.1s;">
 
@@ -740,26 +702,6 @@
         const envelope  = document.getElementById('envelope');
         const mainContent = document.getElementById('main-content');
         const btnOpen = document.getElementById('btn-open');
-
-        // --- personalización desde el link ---
-        const params = new URLSearchParams(location.search);
-        const invitado = (params.get('invitado') || '').trim();
-        const pases = (params.get('pases') || '').trim();
-        if (invitado) {
-            document.getElementById('guest-name').textContent = invitado;
-            document.getElementById('guest-greeting').style.display = 'block';
-            if (pases) {
-                const p = document.getElementById('guest-pases');
-                p.textContent = 'Reservado para ' + pases + (pases === '1' ? ' pase' : ' pases');
-                p.style.display = 'block';
-            }
-        }
-        // mensaje de confirmación personalizado
-        const waConfirm = document.getElementById('wa-confirm');
-        const waPhone = '573000000000'; // TODO: número real de confirmación
-        const waMsg = '¡Hola! Confirmo mi asistencia a los XV de Anisbeth'
-            + (invitado ? ' — ' + invitado : '') + '.';
-        waConfirm.href = 'https://wa.me/' + waPhone + '?text=' + encodeURIComponent(waMsg);
 
         const song = document.getElementById('song');
         const musicBtn = document.getElementById('music-toggle');

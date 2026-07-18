@@ -1288,9 +1288,9 @@
             envelope.classList.add('is-open');
             envScreen.classList.add('is-open');
 
-            // Si por bloqueo de autoplay no se está reproduciendo ya, iniciarla en el segundo 20
+            // Si por bloqueo de autoplay no se está reproduciendo ya, iniciarla en el segundo 2
             if (song.paused) {
-                song.currentTime = 20;
+                song.currentTime = 2;
                 song.volume = 0.6;
                 song.play().then(() => {
                     musicBtn.classList.add('playing');
@@ -1422,8 +1422,8 @@
             reveal();
             inicializarInvitado();
 
-            // Intentar reproducir música inmediatamente en el segundo 20 al cargar
-            song.currentTime = 20;
+            // Intentar reproducir música inmediatamente en el segundo 2 al cargar
+            song.currentTime = 2;
             song.volume = 0.6;
             song.play().then(() => {
                 musicBtn.classList.add('playing');
@@ -1433,7 +1433,7 @@
                 // Si el navegador bloquea el inicio automático, sonará en la primera interacción (clic o toque) en la pantalla
                 const iniciarMusicaInteraccion = () => {
                     if (song.paused) {
-                        song.currentTime = 20;
+                        song.currentTime = 2;
                         song.play().then(() => {
                             musicBtn.classList.add('playing');
                             musicBtn.classList.remove('paused');

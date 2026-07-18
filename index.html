@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XV Años - Anisbeth</title>
+
+    <!-- Metadatos SEO y Compartido (Open Graph) -->
+    <meta name="description" content="Invitación digital para la fiesta de XV Años de Anisbeth Cantillo Rivera. ¡Acompáñanos a celebrar!">
+    <meta property="og:title" content="¡Mis XV Años! - Anisbeth">
+    <meta property="og:description" content="Te invito a celebrar conmigo este día tan especial. Conoce la fecha, ubicación y confirma tu asistencia aquí.">
+    <meta property="og:image" content="mariposa.png">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#163A6B">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -25,7 +34,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #E2E8F0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             font-family: var(--font-sans);
             color: var(--text-dark);
             display: flex;
@@ -240,7 +249,22 @@
             z-index: 9;
             text-align: center;
             cursor: pointer;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            background: none;
+            border: none;
+            padding: 0;
+            outline: none;
+            transition: opacity 0.5s ease, transform 0.3s ease;
+        }
+        .wax-seal-container:hover:not(:disabled) {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+        .wax-seal-container:active:not(:disabled) {
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+        .wax-seal-container:focus-visible {
+            outline: 2px dashed var(--gold);
+            outline-offset: 4px;
+            border-radius: 50%;
         }
         .envelope.is-open .wax-seal-container {
             opacity: 0;
@@ -300,6 +324,17 @@
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
+        }
+        /* Personalización de barra de scroll para un aspecto más limpio y premium */
+        #main-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        #main-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #main-content::-webkit-scrollbar-thumb {
+            background-color: var(--gold);
+            border-radius: 10px;
         }
 
         .card {
@@ -535,6 +570,109 @@
         /* revelación gradual */
         .reveal { opacity: 0; transform: translateY(25px); transition: all 0.9s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Formulario de Confirmación */
+        .confirm-form {
+            width: 100%;
+            max-width: 320px;
+            margin: 20px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 3;
+            text-align: left;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .form-group label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gold-dark);
+            font-weight: 500;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(179,146,78,0.3);
+            border-radius: 8px;
+            background-color: #fff;
+            color: var(--navy-blue);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus, .form-select:focus {
+            border-color: var(--gold-dark);
+            box-shadow: 0 0 5px rgba(216, 180, 103, 0.2);
+        }
+        .form-radio-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 4px;
+        }
+        .form-radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+        .form-radio-label input[type="radio"] {
+            accent-color: var(--navy-blue);
+            width: 16px;
+            height: 16px;
+        }
+        .confirm-feedback {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            text-align: center;
+            min-height: 20px;
+            transition: color 0.3s;
+        }
+        .confirm-feedback.success { color: #16a34a; font-weight: 600; }
+        .confirm-feedback.error { color: #dc2626; font-weight: 600; }
+        .confirm-feedback.loading { color: var(--gold-dark); font-weight: 600; }
+
+        .members-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background-color: rgba(179, 146, 78, 0.05);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px dashed rgba(179, 146, 78, 0.35);
+            margin-top: 6px;
+        }
+        .member-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--navy-blue);
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .member-checkbox-label input[type="checkbox"] {
+            accent-color: var(--navy-blue);
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Adaptabilidad para pantallas pequeñas (ej. iPhone SE) */
+        @media (max-width: 360px) {
+            .title-name { font-size: 3.6rem; }
+            .title-lastname { font-size: 1.4rem; }
+            .section-title { font-size: 1.6rem; }
+            .script-title { font-size: 2.2rem; }
+            .wa-button { padding: 11px 24px; font-size: 0.75rem; }
+            .member-checkbox-label { font-size: 0.82rem; }
+        }
     </style>
 </head>
 <body>
@@ -561,13 +699,13 @@
                 <div class="env-flap">
                     <img src="flores-top.png" alt="">
                 </div>
-                <!-- sello de cera -->
-                <div class="wax-seal-container" id="btn-open">
-                    <div class="wax-seal">
+                <!-- sello de cera (accesible como botón) -->
+                <button class="wax-seal-container" id="btn-open" aria-label="Abrir sobre de invitación">
+                    <span class="wax-seal">
                         <span class="crown">♔</span>
                         <span>ACR</span>
-                    </div>
-                </div>
+                    </span>
+                </button>
             </div>
 
             <p class="open-instruction">
@@ -619,7 +757,7 @@
                     </div>
                 </div>
 
-                <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-action">Ver ubicación</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Banquetes+y+Eventos+Casa+Blanca+Santa+Marta+Magdalena+Calle+11+16D-44" target="_blank" rel="noopener" class="btn-action">Ver ubicación</a>
                 <img src="flores-corner.png" alt="" class="flower-corner-left" onerror="this.style.display='none'">
             </section>
 
@@ -627,10 +765,7 @@
             <section class="card reveal">
                 <h2 class="section-title">Código de Vestimenta</h2>
                 <div class="icon-block">
-                    <svg class="big-ico" viewBox="0 0 64 64" fill="currentColor">
-                        <circle cx="21" cy="13" r="6"/><path d="M13 24h16l2 32H11z"/>
-                        <circle cx="44" cy="13" r="6"/><path d="M44 21 L33 56 H55 Z"/>
-                    </svg>
+                    <img src="vestimenta.png" alt="Código de vestimenta formal" style="width: 150px; height: auto; margin-bottom: 10px;">
                     <p class="label">Formal</p>
                 </div>
 
@@ -646,21 +781,63 @@
             </section>
 
             <!-- 6. CONFIRMACIÓN -->
-            <section class="card reveal">
+            <section class="card reveal" id="sec-confirmacion">
                 <img src="flores-top.png" alt="" class="flower-garland">
                 <img src="mariposa.png" alt="" class="butterfly" style="bottom: 20%; right: 10%; width: 46px; animation-delay: 1s;">
-
+ 
                 <h2 class="section-title">Confirmación</h2>
                 <div class="divider"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.7-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.3-7 10-7 10z"/></svg></div>
                 <p class="deadline-text">
                     Confirma tu asistencia antes del<br>
                     <strong>1 de Agosto de 2026</strong>
                 </p>
+ 
+                <form id="form-confirmacion" class="confirm-form">
+                    <div class="form-group">
+                        <label for="input-nombre">Nombre Completo</label>
+                        <input type="text" id="input-nombre" class="form-input" placeholder="Ej. Juan Pérez" required>
+                    </div>
 
-                <a id="wa-confirm" href="https://wa.me/573000000000?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Anisbeth" target="_blank" rel="noopener" class="wa-button">
-                    <svg viewBox="0 0 32 32" fill="#fff"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.5.7 4.8 1.9 6.8L3 29l6.9-2.3c1.9 1 4.1 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4 1.3 1.3-3.9-.3-.4c-1.1-1.7-1.7-3.6-1.7-5.6C5.6 9.9 10.2 5.3 16 5.3s10.4 4.6 10.4 10.4S21.8 25.7 16 25.7z"/><path d="M22 18.6c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
-                    Confirmar por WhatsApp
-                </a>
+                    <div class="form-group">
+                        <label>¿Asistirás?</label>
+                        <div class="form-radio-container">
+                            <label class="form-radio-label">
+                                <input type="radio" name="asistencia" value="Sí, asistiré" checked required>
+                                Sí, asistiré
+                            </label>
+                            <label class="form-radio-label">
+                                <input type="radio" name="asistencia" value="No podré asistir">
+                                No podré asistir
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="group-acompanantes">
+                        <label for="select-acompanantes">Acompañantes</label>
+                        <select id="select-acompanantes" class="form-select">
+                            <option value="0" selected>Solo yo (0 acompañantes)</option>
+                            <option value="1">1 acompañante</option>
+                            <option value="2">2 acompañantes</option>
+                            <option value="3">3 acompañantes</option>
+                            <option value="4">4 acompañantes</option>
+                            <option value="5">5 acompañantes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="group-miembros" style="display: none;">
+                        <label>Selecciona quiénes asistirán</label>
+                        <div id="miembros-checkboxes" class="members-container">
+                            <!-- Se rellenará dinámicamente -->
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-submit-confirm" class="wa-button" style="width: 100%; justify-content: center; margin-top: 10px; border: none;">
+                        <svg viewBox="0 0 32 32" fill="#fff" style="width: 24px; height: 24px; flex-shrink: 0;"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.5.7 4.8 1.9 6.8L3 29l6.9-2.3c1.9 1 4.1 1.6 6.1 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4 1.3 1.3-3.9-.3-.4c-1.1-1.7-1.7-3.6-1.7-5.6C5.6 9.9 10.2 5.3 16 5.3s10.4 4.6 10.4 10.4S21.8 25.7 16 25.7z"/><path d="M22 18.6c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+                        Confirmar Asistencia
+                    </button>
+                    
+                    <div id="confirm-feedback" class="confirm-feedback"></div>
+                </form>
             </section>
 
             <!-- 7. CARTA DE MAMÁ -->
@@ -698,6 +875,46 @@
     </div>
 
     <script>
+        // ================= CONFIGURACIÓN DE CONTACTO Y GOOGLE SHEETS =================
+        const WHATSAPP_PHONE = "573000000000"; // Reemplaza con tu número de WhatsApp (sin '+' ni espacios, ej: 573001234567)
+        const GOOGLE_SHEET_URL = ""; // Pega aquí la URL de la aplicación web de Google Apps Script cuando la tengas
+        // =============================================================================
+
+        // ================= BASE DE DATOS DE INVITADOS (INTEGRANTES Y CUPOS) =================
+        const GUEST_DATABASE = {
+            "alba-diaz": { nombre: "Sra Alba Diaz", cupos: 1, integrantes: ["Alba Díaz Puentes"] },
+            "arnaldo-andrade": { nombre: "Sr Arnaldo Andrade & sra", cupos: 2, integrantes: ["Iris Lopez Diaz", "Arnaldo Andrade Ceballos"] },
+            "andrade-pulido": { nombre: "Familia Andrade Pulido", cupos: 3, integrantes: ["Arnaldo Andrade Lopez", "Mayerlis Pulido Peña", "Luis Angel Andrade"] },
+            "andrade-prada": { nombre: "Familia Andrade Prada", cupos: 4, integrantes: ["Jose Andrade Lopez", "Damaris Prada Mejia", "Taliana Lopez Prada", "Maria Lopez Prada"] },
+            "edwin-mejia": { nombre: "Edwin Mejia Lopez", cupos: 2, integrantes: ["Edwin Mejia Lopez", "Katherine Lopez Herrera"] },
+            "daniela-lopez": { nombre: "Srta Daniela Lopez Cantillo", cupos: 1, integrantes: ["Daniela Lopez Cantillo"] },
+            "cuisman-paredes": { nombre: "Hnos Cuisman Paredes", cupos: 2, integrantes: ["Bismar Cuisman Paredes", "Yiret Cuisman Paredes"] },
+            "gonzales-jimenez": { nombre: "Hnos Gonzales Jimenez", cupos: 2, integrantes: ["Santiago Gonzales Jimenez", "Nataly Gonzales Jimenez"] },
+            "buelvas-lopez": { nombre: "Familia Buelvas Lopez", cupos: 4, integrantes: ["Dairo Buelvas Figueroa", "Dina Lopez Perez", "Lorena Buelvas Lopez", "Jesus Buelvas Lopez"] },
+            "rivera-lopez": { nombre: "Familia Rivera Lopez", cupos: 3, integrantes: ["Nelly Lopez Figueroa", "Javier Rivera", "Mariana Rivera Lopez"] },
+            "belisario-bornacelly": { nombre: "Sr Belisario Bornacelly Perea", cupos: 1, integrantes: ["Belisario Bornacelly Perea"] },
+            "rocha-rojas": { nombre: "Familia Rocha Rojas", cupos: 3, integrantes: ["Desire Rojas Carrascal", "Justin Rocha Rojas", "Cristian Rocha Rojas"] },
+            "salome-nieto": { nombre: "Srta Salome Nieto Silvera", cupos: 1, integrantes: ["Salome Nieto Silvera"] },
+            "bernal-lopez": { nombre: "Familia Bernal Lopez", cupos: 3, integrantes: ["Victor Bernal Hurtado", "Adriana Lopez Serpa", "Dylan Bernal Lopez"] },
+            "humberto-andrade": { nombre: "Sr Humberto Andrade & sra", cupos: 2, integrantes: ["Humberto Andrade Ceballos", "Jones Carrillo Restrepo"] },
+            "murillo-rojas": { nombre: "Familia Murillo Rojas", cupos: 4, integrantes: ["Nini Rojas Carrascal", "Roberto Murillo Bertiz", "Santiago Murillo Rojas", "Sarai Murillo Rojas"] },
+            "pulido-pena": { nombre: "Familia Pulido Peña", cupos: 4, integrantes: ["Rafael Pulido Elias", "Martha Peña", "Yasmeri Pulido Peña", "Genesis Cogollo Pulido"] },
+            "aura-ceballos": { nombre: "Sra Aura Ceballos", cupos: 2, integrantes: ["Aura Ceballos", "Luz Andrade Ceballos"] },
+            "valentina-carval": { nombre: "Srta Valentina Carval Jimenez", cupos: 1, integrantes: ["Valentina Carval Jimenez"] },
+            "javier-tinoco": { nombre: "Sr Javier Tinoco & sra", cupos: 2, integrantes: ["Javier Tinoco", "Ana Vasquez"] },
+            "vera-diaz": { nombre: "Sra Vera Diaz Martelo", cupos: 2, integrantes: ["Vera Diaz Martelo", "Diana Mejia Diaz"] },
+            "aura-cruz": { nombre: "Sra Aura de la Cruz", cupos: 1, integrantes: ["Aura de la Cruz"] },
+            "victor-amado": { nombre: "Sr Victor Amado Peñaranda", cupos: 1, integrantes: ["Victor Amado Peñaranda"] },
+            "jesus-padilla": { nombre: "Sr Jesus Padilla Pantoja", cupos: 1, integrantes: ["Jesus Padilla Pantoja"] },
+            "andrea-zapata": { nombre: "Sra Andrea Zapata", cupos: 1, integrantes: ["Andrea Zapata Martinez"] },
+            "ruth-lopez": { nombre: "Sra Ruth Lopez Guerrero", cupos: 2, integrantes: ["Ruth Lopez Guerrero", "Yeiner Lopez"] },
+            "viviana-lopez": { nombre: "Sra Viviana Lopez Guerrero", cupos: 1, integrantes: ["Viviana Lopez Guerrero"] },
+            "luz-lopez": { nombre: "Sra Luz Lopez Guerrero", cupos: 1, integrantes: ["Luz Lopez Guerrero"] },
+            "pedro-lopez": { nombre: "Sra Pedro Lopez Salamanca", cupos: 1, integrantes: ["Pedro Lopez Salamanca"] },
+            "juan-soto": { nombre: "Sr Juan Soto", cupos: 1, integrantes: ["Juan Soto"] }
+        };
+        // =====================================================================
+
         const envScreen = document.getElementById('envelope-screen');
         const envelope  = document.getElementById('envelope');
         const mainContent = document.getElementById('main-content');
@@ -706,10 +923,12 @@
         const song = document.getElementById('song');
         const musicBtn = document.getElementById('music-toggle');
 
-        btnOpen.addEventListener('click', () => {
+        function abrirSobre() {
+            if (envelope.classList.contains('is-open')) return;
             envelope.classList.add('is-open');
             envScreen.classList.add('is-open');
-            // el tap del sello permite reproducir audio en móvil
+            
+            // Reproducir audio con interacción del usuario
             song.volume = 0.6;
             song.play().then(() => {
                 musicBtn.classList.add('playing');
@@ -717,16 +936,26 @@
             }).catch(() => {
                 musicBtn.classList.add('paused');
             });
-            // tras ver la tarjeta "Mis XV Años", sube el sobre y muestra la portada
+
+            // Tras ver la tarjeta "Mis XV Años", sube el sobre y muestra la portada
             setTimeout(() => {
                 envScreen.classList.add('lift');
                 mainContent.style.overflowY = 'auto';
                 musicBtn.classList.add('visible');
                 reveal();
             }, 2600);
+        }
+
+        // Abrir sobre al hacer clic o al presionar Enter/Espacio (Accesibilidad)
+        btnOpen.addEventListener('click', abrirSobre);
+        btnOpen.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                abrirSobre();
+            }
         });
 
-        // pausar / reanudar
+        // Pausar / reanudar música
         musicBtn.addEventListener('click', () => {
             if (song.paused) {
                 song.play();
@@ -739,6 +968,7 @@
             }
         });
 
+        // Revelación de secciones al hacer scroll
         const reveals = document.querySelectorAll('.reveal');
         function reveal() {
             const h = window.innerHeight;
@@ -748,7 +978,186 @@
         }
         mainContent.addEventListener('scroll', reveal);
         window.addEventListener('resize', reveal);
-        window.addEventListener('load', reveal);
+
+        // Lógica de Formulario de Confirmación (Google Sheets + WhatsApp)
+        const formConfirmacion = document.getElementById('form-confirmacion');
+        const feedbackConfirm = document.getElementById('confirm-feedback');
+        const radioAsistencia = document.querySelectorAll('input[name="asistencia"]');
+        const groupAcompanantes = document.getElementById('group-acompanantes');
+        const groupMiembros = document.getElementById('group-miembros');
+        const inputNombre = document.getElementById('input-nombre');
+        const selectAcompanantes = document.getElementById('select-acompanantes');
+        const containerMiembros = document.getElementById('miembros-checkboxes');
+
+        // Ocultar campo de acompañantes o lista de miembros si selecciona "No podré asistir"
+        radioAsistencia.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'No podré asistir') {
+                    groupAcompanantes.style.display = 'none';
+                    groupMiembros.style.display = 'none';
+                } else {
+                    if (activeGuest) {
+                        groupAcompanantes.style.display = 'none';
+                        groupMiembros.style.display = 'flex';
+                    } else {
+                        groupAcompanantes.style.display = 'flex';
+                        groupMiembros.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Inicialización y configuración de los cupos del invitado
+        let activeGuest = null;
+        function inicializarInvitado() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestId = urlParams.get('g') ? urlParams.get('g').toLowerCase().trim() : null;
+
+            if (guestId && GUEST_DATABASE[guestId]) {
+                activeGuest = GUEST_DATABASE[guestId];
+
+                // Autocompletar nombre y bloquearlo para evitar alteraciones
+                inputNombre.value = activeGuest.nombre;
+                inputNombre.readOnly = true;
+                inputNombre.style.backgroundColor = "rgba(179, 146, 78, 0.05)";
+                inputNombre.style.borderColor = "var(--gold)";
+
+                // Configurar para mostrar checkboxes de miembros de la familia
+                groupAcompanantes.style.display = 'none';
+                groupMiembros.style.display = 'flex';
+                containerMiembros.innerHTML = "";
+
+                activeGuest.integrantes.forEach(miembro => {
+                    const row = document.createElement('div');
+                    row.style.margin = "4px 0";
+                    
+                    const label = document.createElement('label');
+                    label.className = "member-checkbox-label";
+                    
+                    const chk = document.createElement('input');
+                    chk.type = "checkbox";
+                    chk.name = "miembro-asistente";
+                    chk.value = miembro;
+                    chk.checked = true; // Por defecto marcamos todos
+                    
+                    label.appendChild(chk);
+                    label.appendChild(document.createTextNode(` ${miembro}`));
+                    row.appendChild(label);
+                    containerMiembros.appendChild(row);
+                });
+            }
+        }
+
+        window.addEventListener('load', () => {
+            reveal();
+            inicializarInvitado();
+        });
+
+        formConfirmacion.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const nombre = inputNombre.value.trim();
+            let asistencia = "Sí, asistiré";
+            radioAsistencia.forEach(r => { if(r.checked) asistencia = r.value; });
+
+            let acompanantesVal = "0";
+            let asistentesArray = [];
+
+            if (asistencia === "Sí, asistiré") {
+                if (activeGuest) {
+                    // Obtener miembros seleccionados
+                    const checkedCheckboxes = document.querySelectorAll('input[name="miembro-asistente"]:checked');
+                    if (checkedCheckboxes.length === 0) {
+                        feedbackConfirm.textContent = "Por favor, selecciona al menos un asistente o marca 'No podré asistir'.";
+                        feedbackConfirm.className = "confirm-feedback error";
+                        return;
+                    }
+                    checkedCheckboxes.forEach(chk => {
+                        asistentesArray.push(chk.value);
+                    });
+                    acompanantesVal = `Asisten: ${asistentesArray.join(', ')} (${asistentesArray.length} de ${activeGuest.cupos})`;
+                } else {
+                    acompanantesVal = selectAcompanantes.value;
+                }
+            } else {
+                acompanantesVal = "Lamentablemente no puede asistir";
+            }
+
+            if (!nombre) {
+                feedbackConfirm.textContent = "Por favor, ingresa tu nombre completo.";
+                feedbackConfirm.className = "confirm-feedback error";
+                return;
+            }
+
+            feedbackConfirm.textContent = "Guardando confirmación...";
+            feedbackConfirm.className = "confirm-feedback loading";
+
+            // Crear mensaje personalizado para enviar por WhatsApp
+            let waText = "";
+            if (activeGuest) {
+                if (asistencia === "Sí, asistiré") {
+                    waText = `¡Hola! Confirmo nuestra asistencia a los XV de Anisbeth.\n\n*Familia:* ${nombre}\n*Asistencia:* Sí, asistiremos\n\n*Personas que asistirán:*\n${asistentesArray.map(a => `- ${a}`).join('\n')}`;
+                } else {
+                    waText = `¡Hola! Lamentablemente no podremos asistir a los XV de Anisbeth.\n\n*Familia:* ${nombre}\n*Asistencia:* No asistiremos`;
+                }
+            } else {
+                if (asistencia === "Sí, asistiré") {
+                    waText = `¡Hola! Confirmo mi asistencia a los XV de Anisbeth.\n\n*Nombre:* ${nombre}\n*Asistencia:* Sí, asistiré\n*Acompañantes:* ${acompanantesVal === "0" ? "Ninguno (Solo yo)" : acompanantesVal}`;
+                } else {
+                    waText = `¡Hola! Lamentablemente no podré asistir a los XV de Anisbeth.\n\n*Nombre:* ${nombre}\n*Asistencia:* No asistiré`;
+                }
+            }
+            const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(waText)}`;
+
+            const dataToSend = {
+                nombre: nombre,
+                asistencia: asistencia,
+                acompanantes: acompanantesVal
+            };
+
+            // Función para redirigir al usuario a WhatsApp
+            const redirigirWhatsApp = () => {
+                feedbackConfirm.textContent = "¡Muchas gracias! Abriendo WhatsApp para enviar confirmación...";
+                feedbackConfirm.className = "confirm-feedback success";
+                setTimeout(() => {
+                    window.open(waUrl, '_blank');
+                    formConfirmacion.reset();
+                    if (activeGuest) {
+                        inputNombre.value = activeGuest.nombre;
+                        // Volver a marcar los checkboxes
+                        const checkboxes = document.querySelectorAll('input[name="miembro-asistente"]');
+                        checkboxes.forEach(chk => chk.checked = true);
+                        groupAcompanantes.style.display = 'none';
+                        groupMiembros.style.display = 'flex';
+                    } else {
+                        groupAcompanantes.style.display = 'flex';
+                        groupMiembros.style.display = 'none';
+                    }
+                    feedbackConfirm.textContent = "";
+                }, 1500);
+            };
+
+            // Si hay URL de Google Sheets, enviar los datos en segundo plano
+            if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL.trim() !== "") {
+                fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Evita problemas de CORS al hacer POST cruzado a Google Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataToSend)
+                })
+                .then(() => {
+                    redirigirWhatsApp();
+                })
+                .catch(err => {
+                    console.error("Error al registrar en Google Sheets:", err);
+                    redirigirWhatsApp();
+                });
+            } else {
+                redirigirWhatsApp();
+            }
+        });
     </script>
 </body>
 </html>

@@ -1447,26 +1447,24 @@
                 acompanantes: acompanantesVal
             };
 
-            // Función para redirigir al usuario a WhatsApp
+            // Función para redirigir al usuario a WhatsApp y actualizar el formulario
             const redirigirWhatsApp = () => {
-                feedbackConfirm.textContent = "¡Muchas gracias! Abriendo WhatsApp para enviar confirmación...";
+                feedbackConfirm.textContent = "¡Muchas gracias! Tu confirmación ha sido registrada.";
                 feedbackConfirm.className = "confirm-feedback success";
+                
+                // Deshabilitar todos los elementos del formulario para evitar dobles envíos
+                const inputs = formConfirmacion.querySelectorAll('input, select, button');
+                inputs.forEach(input => input.disabled = true);
+                
+                // Ocultar el botón de confirmar
+                const btnSubmit = document.getElementById('btn-submit-confirm');
+                if (btnSubmit) {
+                    btnSubmit.style.display = 'none';
+                }
+                
                 setTimeout(() => {
                     window.open(waUrl, '_blank');
-                    formConfirmacion.reset();
-                    if (activeGuest) {
-                        inputNombre.value = activeGuest.nombre;
-                        // Volver a marcar los checkboxes
-                        const checkboxes = document.querySelectorAll('input[name="miembro-asistente"]');
-                        checkboxes.forEach(chk => chk.checked = true);
-                        groupAcompanantes.style.display = 'none';
-                        groupMiembros.style.display = 'flex';
-                    } else {
-                        groupAcompanantes.style.display = 'flex';
-                        groupMiembros.style.display = 'none';
-                    }
-                    feedbackConfirm.textContent = "";
-                }, 1500);
+                }, 1000);
             };
 
             // Si hay URL de Google Sheets, enviar los datos en segundo plano

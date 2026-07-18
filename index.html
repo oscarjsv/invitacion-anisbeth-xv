@@ -965,6 +965,65 @@
                 font-size: 0.82rem;
             }
         }
+
+        .btn-portada {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            white-space: nowrap;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 5;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .scroll-indicator:hover {
+            opacity: 1;
+        }
+
+        .scroll-line {
+            width: 1.5px;
+            height: 35px;
+            background: rgba(216, 180, 103, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: var(--gold);
+            animation: scrollLineAnim 2s infinite ease-in-out;
+        }
+
+        @keyframes scrollLineAnim {
+            0% {
+                transform: translateY(-12px);
+            }
+            50% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(35px);
+            }
+        }
     </style>
 </head>
 
@@ -1034,8 +1093,13 @@
                 <p class="tag-xv">XV AÑOS</p>
                 <p class="main-date">15 &middot; AGOSTO &middot; 2026</p>
 
-                <button class="btn-action"
-                    onclick="document.getElementById('sec-info').scrollIntoView({behavior:'smooth'})">Comenzar</button>
+                <button class="btn-action btn-portada"
+                    onclick="document.getElementById('main-content').scrollTo({ top: document.getElementById('sec-info').offsetTop, behavior: 'smooth' })">Comenzar</button>
+
+                <!-- Indicador de Scroll Minimalista y Elegante -->
+                <div class="scroll-indicator" onclick="document.getElementById('main-content').scrollTo({ top: document.getElementById('sec-info').offsetTop, behavior: 'smooth' })">
+                    <span class="scroll-line"></span>
+                </div>
             </section>
 
             <!-- 4. INFORMACIÓN -->
@@ -1329,15 +1393,31 @@
         });
 
         // Revelación de secciones al hacer scroll
+        // Revelación de secciones al hacer scroll usando IntersectionObserver
         const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: "0px 0px -60px 0px",
+            threshold: 0.01
+        });
+
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // Función reveal de compatibilidad para llamadas directas
         function reveal() {
-            const h = window.innerHeight;
             reveals.forEach(el => {
-                if (el.getBoundingClientRect().top < h - 100) el.classList.add('active');
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) {
+                    el.classList.add('active');
+                }
             });
         }
-        mainContent.addEventListener('scroll', reveal);
-        window.addEventListener('resize', reveal);
 
         // Lógica de Formulario de Confirmación (Google Sheets + WhatsApp)
         const formConfirmacion = document.getElementById('form-confirmacion');

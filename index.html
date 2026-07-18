@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap"
         rel="stylesheet">
 
     <style>
@@ -32,7 +32,7 @@
             --gold-dark: #B3924E;
             --text-dark: #3E4756;
             --font-serif: 'Cormorant Garamond', serif;
-            --font-script: 'Great Vibes', cursive;
+            --font-script: 'Alex Brush', cursive;
             --font-sans: 'Montserrat', sans-serif;
         }
 
@@ -1497,9 +1497,10 @@
                     btnSubmit.style.display = 'none';
                 }
                 
-                setTimeout(() => {
-                    window.open(waUrl, '_blank');
-                }, 1000);
+                // Redireccionamiento automático a WhatsApp deshabilitado a petición del usuario
+                // setTimeout(() => {
+                //     window.open(waUrl, '_blank');
+                // }, 1000);
             };
 
             // Si hay URL de Google Sheets, enviar los datos en segundo plano

@@ -1300,14 +1300,6 @@
                 mainContent.style.overflowY = 'auto';
                 musicBtn.classList.add('visible');
                 reveal();
-
-                // Auto-scroll a la sección de información después de mostrar la portada (tiempo ampliado a 4 segundos para mejor lectura)
-                setTimeout(() => {
-                    const secInfo = document.getElementById('sec-info');
-                    if (secInfo) {
-                        mainContent.scrollTo({ top: secInfo.offsetTop, behavior: 'smooth' });
-                    }
-                }, 4000);
             }, 2600);
         }
 

@@ -441,6 +441,7 @@
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
+            scroll-snap-type: y mandatory;
         }
 
         /* Personalización de barra de scroll para un aspecto más limpio y premium */
@@ -470,6 +471,8 @@
             position: relative;
             background-color: var(--bg-cream);
             overflow: hidden;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
         }
 
         .btn-action {

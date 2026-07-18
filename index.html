@@ -1288,15 +1288,17 @@
             envelope.classList.add('is-open');
             envScreen.classList.add('is-open');
 
-            // Configurar para que la canción empiece en el segundo 20
-            song.currentTime = 20;
-            song.volume = 0.6;
-            song.play().then(() => {
-                musicBtn.classList.add('playing');
-                musicBtn.classList.remove('paused');
-            }).catch(() => {
-                musicBtn.classList.add('paused');
-            });
+            // Si por bloqueo de autoplay no se está reproduciendo ya, iniciarla en el segundo 20
+            if (song.paused) {
+                song.currentTime = 20;
+                song.volume = 0.6;
+                song.play().then(() => {
+                    musicBtn.classList.add('playing');
+                    musicBtn.classList.remove('paused');
+                }).catch(() => {
+                    musicBtn.classList.add('paused');
+                });
+            }
 
             // Tras ver la tarjeta "Mis XV Años", sube el sobre y muestra la portada
             setTimeout(() => {
@@ -1419,6 +1421,30 @@
         window.addEventListener('load', () => {
             reveal();
             inicializarInvitado();
+
+            // Intentar reproducir música inmediatamente en el segundo 20 al cargar
+            song.currentTime = 20;
+            song.volume = 0.6;
+            song.play().then(() => {
+                musicBtn.classList.add('playing');
+                musicBtn.classList.remove('paused');
+            }).catch(() => {
+                console.log("Autoplay bloqueado. Se reproducirá al primer toque en la pantalla.");
+                // Si el navegador bloquea el inicio automático, sonará en la primera interacción (clic o toque) en la pantalla
+                const iniciarMusicaInteraccion = () => {
+                    if (song.paused) {
+                        song.currentTime = 20;
+                        song.play().then(() => {
+                            musicBtn.classList.add('playing');
+                            musicBtn.classList.remove('paused');
+                        }).catch(e => console.log(e));
+                    }
+                    document.removeEventListener('click', iniciarMusicaInteraccion);
+                    document.removeEventListener('touchstart', iniciarMusicaInteraccion);
+                };
+                document.addEventListener('click', iniciarMusicaInteraccion);
+                document.addEventListener('touchstart', iniciarMusicaInteraccion);
+            });
         });
 
         formConfirmacion.addEventListener('submit', (e) => {

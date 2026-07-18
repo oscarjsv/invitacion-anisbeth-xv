@@ -1288,7 +1288,8 @@
             envelope.classList.add('is-open');
             envScreen.classList.add('is-open');
 
-            // Reproducir audio con interacción del usuario
+            // Configurar para que la canción empiece en el segundo 20
+            song.currentTime = 20;
             song.volume = 0.6;
             song.play().then(() => {
                 musicBtn.classList.add('playing');

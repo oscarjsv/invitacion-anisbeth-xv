@@ -965,62 +965,6 @@
                 font-size: 0.82rem;
             }
         }
-
-        .btn-portada {
-            position: absolute;
-            bottom: 80px;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            z-index: 5;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 5;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-
-        .scroll-indicator:hover {
-            opacity: 1;
-        }
-
-        .scroll-line {
-            width: 1.5px;
-            height: 35px;
-            background: rgba(216, 180, 103, 0.25);
-            position: relative;
-            overflow: hidden;
-            display: block;
-        }
-
-        .scroll-line::after {
-            content: '';
-            position: absolute;
-            top: -12px;
-            left: 0;
-            width: 100%;
-            height: 12px;
-            background: var(--gold);
-            animation: scrollLineAnim 1.8s infinite ease-in-out;
-        }
-
-        @keyframes scrollLineAnim {
-            0% {
-                top: -12px;
-            }
-            100% {
-                top: 35px;
-            }
-        }
     </style>
 </head>
 
@@ -1089,14 +1033,6 @@
                     </svg></div>
                 <p class="tag-xv">XV AÑOS</p>
                 <p class="main-date">15 &middot; AGOSTO &middot; 2026</p>
-
-                <button class="btn-action btn-portada"
-                    onclick="document.getElementById('main-content').scrollTo({ top: document.getElementById('sec-info').offsetTop, behavior: 'smooth' })">Comenzar</button>
-
-                <!-- Indicador de Scroll Minimalista y Elegante -->
-                <div class="scroll-indicator" onclick="document.getElementById('main-content').scrollTo({ top: document.getElementById('sec-info').offsetTop, behavior: 'smooth' })">
-                    <span class="scroll-line"></span>
-                </div>
             </section>
 
             <!-- 4. INFORMACIÓN -->
@@ -1364,6 +1300,14 @@
                 mainContent.style.overflowY = 'auto';
                 musicBtn.classList.add('visible');
                 reveal();
+
+                // Auto-scroll a la sección de información después de mostrar la portada (tiempo ampliado a 4 segundos para mejor lectura)
+                setTimeout(() => {
+                    const secInfo = document.getElementById('sec-info');
+                    if (secInfo) {
+                        mainContent.scrollTo({ top: secInfo.offsetTop, behavior: 'smooth' });
+                    }
+                }, 4000);
             }, 2600);
         }
 
@@ -1389,32 +1333,23 @@
             }
         });
 
-        // Revelación de secciones al hacer scroll
-        // Revelación de secciones al hacer scroll usando IntersectionObserver
+        // Revelación de secciones al hacer scroll (100% compatible con todos los navegadores móviles)
         const reveals = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            rootMargin: "0px 0px -60px 0px",
-            threshold: 0.01
-        });
-
-        reveals.forEach(el => revealObserver.observe(el));
-
-        // Función reveal de compatibilidad para llamadas directas
         function reveal() {
+            const h = window.innerHeight;
             reveals.forEach(el => {
                 const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 50) {
+                // Si la parte superior de la tarjeta entra a la pantalla (con un margen de 40px desde abajo)
+                if (rect.top < h - 40) {
                     el.classList.add('active');
                 }
             });
         }
+
+        // Registrar los escuchas de eventos de scroll tanto en el contenedor como en la ventana global
+        mainContent.addEventListener('scroll', reveal);
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('resize', reveal);
 
         // Lógica de Formulario de Confirmación (Google Sheets + WhatsApp)
         const formConfirmacion = document.getElementById('form-confirmacion');

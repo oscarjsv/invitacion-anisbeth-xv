@@ -1115,12 +1115,12 @@
                 acompanantes: acompanantesVal
             };
 
-            // Función para redirigir al usuario a WhatsApp
+            // Función para confirmar en pantalla sin abrir WhatsApp
             const redirigirWhatsApp = () => {
-                feedbackConfirm.textContent = "¡Muchas gracias! Abriendo WhatsApp para enviar confirmación...";
+                feedbackConfirm.textContent = "¡Muchas gracias! Tu confirmación ha sido registrada.";
                 feedbackConfirm.className = "confirm-feedback success";
                 setTimeout(() => {
-                    window.open(waUrl, '_blank');
+                    // window.open(waUrl, '_blank'); // Deshabilitado a petición del usuario
                     formConfirmacion.reset();
                     if (activeGuest) {
                         inputNombre.value = activeGuest.nombre;
@@ -1134,7 +1134,7 @@
                         groupMiembros.style.display = 'none';
                     }
                     feedbackConfirm.textContent = "";
-                }, 1500);
+                }, 2000);
             };
 
             // Si hay URL de Google Sheets, enviar los datos en segundo plano

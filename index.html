@@ -1384,6 +1384,15 @@
             const urlParams = new URLSearchParams(window.location.search);
             const guestId = urlParams.get('g') ? urlParams.get('g').toLowerCase().trim() : null;
 
+            // Ocultar sección de confirmación si se pasa confirm=no o c=0 en la URL
+            const showConfirm = urlParams.get('confirm') !== 'no' && urlParams.get('c') !== '0';
+            if (!showConfirm) {
+                const secConfirm = document.getElementById('sec-confirmacion');
+                if (secConfirm) {
+                    secConfirm.style.display = 'none';
+                }
+            }
+
             if (guestId && GUEST_DATABASE[guestId]) {
                 activeGuest = GUEST_DATABASE[guestId];
 

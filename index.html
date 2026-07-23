@@ -1207,7 +1207,7 @@
                     style="top: 20%; left: 50%; transform: translateX(-50%); width: 72px; animation-duration: 8s;">
                 <p style="font-size: 1.05rem; letter-spacing: 1px; margin-top: 40px;">Gracias por ser parte de<br>este
                     día tan especial.</p>
-                <h2 class="big-wait">¡Te espero!</h2>
+                <h2 class="big-wait" id="text-despedida">¡Te espero!</h2>
                 <div class="divider"><svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 21s-7-4.7-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.3-7 10-7 10z" />
                     </svg></div>
@@ -1390,6 +1390,10 @@
                 const secConfirm = document.getElementById('sec-confirmacion');
                 if (secConfirm) {
                     secConfirm.style.display = 'none';
+                }
+                const textDespedida = document.getElementById('text-despedida');
+                if (textDespedida) {
+                    textDespedida.textContent = "¡Con cariño!";
                 }
             }
 
